@@ -7,6 +7,15 @@ audio_path="https://stream-relay-geo.ntslive.net/stream?t=1535983749542"
 live_recording_length_s=15
 while test $# -gt 0; do
     case "$1" in
+        help)
+            shift
+            echo "\nParameters:"
+            echo "-v VIDEO_PATH"
+            echo "-a AUDIO_PATH_OR_URL (defaults to stream 1)"
+            echo "-i IMAGE_PATH (max-width 1200px)"
+            echo ""
+            exit 1;
+            ;;
         -a)
             shift
             audio_path=$1
@@ -51,7 +60,7 @@ fi
 #
 
 # Records live stream
-ffmpeg -y -i $audio_path -t 00:00:$live_recording_length_s output_audio.mp3 &&
+ffmpeg -y -i $audio_path -t 00:00:$live_recording_length_s output_audio.mp3
 
 #
 #
@@ -63,6 +72,6 @@ fi
 
 # Replaces audio on given video path with live stream recording.
 if [ $image_path ]; then
-  ffmpeg -y -loop 1 -i $image_path -i output_audio.mp3 -c:v libx264 -tune stillimage -c:a aac -b:a 192k -pix_fmt yuv420p -shortest output.mp4
-  # ffmpeg -y -loop 1 -i $image_path -i $audio_path -c:v libx264 -tune stillimage -c:a aac -b:a 192k -pix_fmt yuv420p -aframes 5 -shortest output.mp4
+  ffmpeg -y -loop 1 -i $image_path -i output_audio.mp3 -t 00:00:$live_recording_length_s -c:v libx264 -tune stillimage -c:a aac -ar 44100 -r 30 -pix_fmt yuv420p output.mp4
+  # ffmpeg -loop 1 -y -i $image_path -i output_audio.mp3 -acodec copy -vcodec libx264output.mp4
 fi
