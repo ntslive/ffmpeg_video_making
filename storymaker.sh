@@ -60,7 +60,7 @@ ffmpeg -y -i $audio_path -t 00:00:$live_recording_length_s output_audio.mp3 &&
 if [ $video_path ]; then
   echo "video source =" $video_path
 
-  ffmpeg -i $video_path -i output_audio.mp3 -c:v copy -tune stillimage -c:a aac -b:a 320k -pix_fmt yuv420p -map 0:v:0 -map 1:a:0 output.mp4
+  ffmpeg -i $video_path -i output_audio.mp3 -c:v copy -tune animation -c:a aac -b:a 320k -pix_fmt yuv420p -map 0:v:0 -map 1:a:0 -shortest output.mp4
 fi
 
 # Replaces audio on given video path with live stream recording.
