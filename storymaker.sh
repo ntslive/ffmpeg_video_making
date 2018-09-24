@@ -1,18 +1,27 @@
 #!/bin/bash
 
 OUTPUT_FOLDER_NAME="output"
+STREAM_ONE_URL="https://stream-relay-geo.ntslive.net/stream"
+STREAM_TWO_URL="https://stream-relay-geo.ntslive.net/stream2"
 
 # Reading params from call, getting video or image path.
-audio_path="https://stream-relay-geo.ntslive.net/stream?t=1535983749542"
+audio_path=$STREAM_ONE_URL
 live_recording_length_s=15
 while test $# -gt 0; do
     case "$1" in
-        help)
+        --stream2)
             shift
-            echo "\nParameters:"
-            echo "-v VIDEO_PATH"
-            echo "-a AUDIO_PATH_OR_URL (defaults to stream 1)"
-            echo "-i IMAGE_PATH (max-width 1200px)"
+            audio_path=$STREAM_TWO_URL
+            ;;
+        --help)
+            shift
+            echo "\nUsage:"
+            echo "-v [file_path]\t\t Sets which video's audio to overwrite."
+            echo "-i [file_path]\t\t Image from which to create video from. Maximum image width or height should be 1200px."
+            echo "-t [seconds]\t\t Sets length (in seconds) of audio recording. Defaults to 15s."
+            echo "-a [file_path | url]\t Forces audio source to given file or URL. Defaults to NTS Stream 1 URL."
+            echo "--stream2\t\t Sets audio recording to be taken from NTS Stream 2."
+            echo "--help\t\t\t Print script usage."
             echo ""
             exit 1;
             ;;
@@ -38,10 +47,17 @@ while test $# -gt 0; do
             ;;
         *)
             echo "$1 is not a recognized flag!"
-            return 1;
+            echo "Use flag '--help' for usage."
+            exit 1;
             ;;
     esac
 done
+
+if [ -z $video_path -a -z $image_path]; then
+  echo "ERROR: An image or video is required."
+  echo "Use flag '--help' for usage."
+  exit 1
+fi
 
 echo "audio source =" $audio_path
 if [ $video_path ]; then
@@ -49,11 +65,6 @@ if [ $video_path ]; then
 fi
 if [ $image_path ]; then
   echo "image source =" $image_path
-fi
-
-if [ -z $video_path -a -z $image_path]; then
-  echo "\nError: Please add a video (-v PATH) or image (-i PATH)."
-  exit 1
 fi
 
 #
