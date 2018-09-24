@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUT_AUDIO_FILENAME="out_audio.mp3"
+OUTPUT_FOLDER_NAME="output"
 
 # Reading params from call, getting video or image path.
 audio_path="https://stream-relay-geo.ntslive.net/stream?t=1535983749542"
@@ -65,13 +65,18 @@ ffmpeg -y -i $audio_path -t 00:00:$live_recording_length_s output_audio.mp3
 #
 #
 
+# Get size of output folder, and create file name including a unique numeric.
+out_folder_size=`echo $(find $OUTPUT_FOLDER_NAME -type f | wc -l)`
+next_item_size=`expr $out_folder_size + 1`
+out_file_name="${OUTPUT_FOLDER_NAME}/story_${next_item_size}.mp4";
+
 # Replaces audio on given video path with live stream recording.
 if [ $video_path ]; then
-  ffmpeg -i $video_path -i output_audio.mp3 -c:v copy -tune animation -c:a aac -b:a 320k -pix_fmt yuv420p -map 0:v:0 -map 1:a:0 -shortest output.mp4
+  ffmpeg -i $video_path -i output_audio.mp3 -c:v copy -tune animation -c:a aac -b:a 320k -pix_fmt yuv420p -map 0:v:0 -map 1:a:0 -shortest $out_file_name
 fi
 
 # Replaces audio on given video path with live stream recording.
 if [ $image_path ]; then
-  ffmpeg -y -loop 1 -i $image_path -i output_audio.mp3 -t 00:00:$live_recording_length_s -c:v libx264 -tune stillimage -c:a aac -ar 44100 -r 30 -pix_fmt yuv420p output.mp4
+  ffmpeg -loop 1 -i $image_path -i output_audio.mp3 -t 00:00:$live_recording_length_s -c:v libx264 -tune stillimage -c:a aac -ar 44100 -r 30 -pix_fmt yuv420p $out_file_name
   # ffmpeg -loop 1 -y -i $image_path -i output_audio.mp3 -acodec copy -vcodec libx264output.mp4
 fi
