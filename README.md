@@ -1,13 +1,40 @@
 # NTS Story Maker
 
-Simple script utilising ffmpeg functions to create mp4 videos.
+Simple bash script utilising ffmpeg functions to create mp4 videos.
 
 Features:
 * Create a video from an image and audio file.
 * Create a video from an image and a live mp3 stream recording.
 * Create a video from a video, and overwrite it's audio with new audio.
 
+## Installation
+
+To run the story maker, you'll need to install `ffmpeg`, which can be done (on Mac OS) with Homebrew. Follow these steps, or look at the full installation tutorial on [ffmpeg's website](https://trac.ffmpeg.org/wiki/CompilationGuide/macOS#ffmpegthroughHomebrew).
+
+Step 1. This installs `Homebrew` to your system.
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Step 2. With `Homebrew` installed, you can then install `ffmpeg` with it. The following wil install `ffmpeg` on your machine - note that it can take a few minutes.
+```
+brew install ffmpeg --with-tools --with-fdk-aac --with-libvpx --with-x265 --HEAD
+```
+
+Step 3. You need to download the storymaker script from the NTS git repository. 'Clone' the code with following command, which will create the repo in a folder called 'storymaker':
+```
+git clone https://github.com/ntslive/ffmpeg_video_making.git storymaker
+```
+
+You should now be able to run storymaker.
+
 ## Usage
+From the terminal, change directory into the storymaker repo, e.g. `cd storymaker`. You can execute the script like so:
+```
+./storymaker --help
+```
+
+Above executes the help function, there are examples on usages there.
 
 Flag | Description
 ------------- | -------------
