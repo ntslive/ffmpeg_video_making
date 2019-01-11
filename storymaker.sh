@@ -79,7 +79,7 @@ fi
 #
 
 # Records live stream
-ffmpeg -y -i $audio_path -t 00:00:$live_recording_length_s output_audio.mp3
+ffmpeg -y -i $audio_path -t $live_recording_length_s output_audio.mp3
 
 #
 #
@@ -96,6 +96,6 @@ fi
 
 # Replaces audio on given video path with live stream recording.
 if [ $image_path ]; then
-  ffmpeg -loop 1 -i $image_path -i output_audio.mp3 -t 00:00:$live_recording_length_s -c:v libx264 -tune stillimage -c:a aac -ar 44100 -r 30 -pix_fmt yuv420p $out_file_name
+   ffmpeg -loop 1 -i $image_path -i output_audio.mp3 -t $live_recording_length_s -c:v libx264 -tune stillimage -c:a aac -ar 44100 -r 30 -pix_fmt yuv420p $out_file_name
   # ffmpeg -loop 1 -y -i $image_path -i output_audio.mp3 -acodec copy -vcodec libx264output.mp4
 fi
