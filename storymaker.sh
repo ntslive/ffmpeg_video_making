@@ -15,14 +15,22 @@ while test $# -gt 0; do
             ;;
         --help)
             shift
-            echo "\nUsage:"
-            echo "-v [file_path]\t\t Sets which video's audio to overwrite."
-            echo "-i [file_path]\t\t Image from which to create video from. Maximum image width or height should be 1200px."
-            echo "-t [seconds]\t\t Sets length (in seconds) of audio recording. Defaults to 15s."
-            echo "-a [file_path | url]\t Forces audio source to given file or URL. Defaults to NTS Stream 1 URL."
-            echo "--stream2\t\t Sets audio recording to be taken from NTS Stream 2."
-            echo "--help\t\t\t Print script usage."
+            echo -e "Usage:"
+            echo -e "-v [file_path]\t\t Sets which video's audio to overwrite."
+            echo -e "-i [file_path]\t\t Image from which to create video from. Maximum image width or height should be 1200px."
+            echo -e "-t [seconds]\t\t Sets length (in seconds) of audio recording. Defaults to 15s."
+            echo -e "-a [file_path | url]\t Forces audio source to given file or URL. Defaults to NTS Stream 1 URL."
+            echo -e "--stream2\t\t Sets audio recording to be taken from NTS Stream 2."
+            echo -e "--help\t\t\t Print script usage."
             echo ""
+            echo "Created videos are placed in the output/ folder."
+            echo ""
+            echo "Examples:"
+            echo -e "- Create a 15s video, recording NTS stream 1 on top of image.\n\t./storymaker -i images/sample.jpg "
+            echo -e "- Create a 15s video, recording NTS stream 1 on top of video.\n\t./storymaker -v video/ld_sample.mp4"
+            echo -e "- Create a 10s video, putting audio from a file on top of a video.\n\t./storymaker -v video/ld_sample.mp4 -a audio/sample.mp3 -t 10"
+            echo ""
+
             exit 1;
             ;;
         -a)
