@@ -11,12 +11,14 @@ Features:
 
 To run the story maker, you'll need to install `ffmpeg`, which can be done (on Mac OS) with Homebrew. Follow these steps, or look at the full installation tutorial on [ffmpeg's website](https://trac.ffmpeg.org/wiki/CompilationGuide/macOS#ffmpegthroughHomebrew).
 
+Open the 'terminal' application on your mac, where you'll execute these commands. Note, these commands can take quite a few minutes to finish!
+
 Step 1. This installs `Homebrew` to your system.
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Step 2. With `Homebrew` installed, you can then install `ffmpeg` with it. The following wil install `ffmpeg` on your machine - note that it can take a few minutes.
+Step 2. With `Homebrew` installed, you can then install `ffmpeg` with it. The following wil install `ffmpeg` on your machine.
 ```
 brew install ffmpeg --with-tools --with-fdk-aac --with-libvpx --with-x265 --HEAD
 ```
@@ -29,7 +31,7 @@ git clone https://github.com/ntslive/ffmpeg_video_making.git storymaker
 You should now be able to run storymaker.
 
 ## Usage
-From the terminal, change directory into the storymaker repo, e.g. `cd storymaker`. You can execute the script like so:
+From the terminal, change directory into the storymaker repo if you aren't in it already, e.g. `cd storymaker`. You can check which directory you are in by executing `pwd`. When in the directory, you can execute the script like so:
 ```
 ./storymaker --help
 ```
