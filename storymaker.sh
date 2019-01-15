@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 OUTPUT_FOLDER_NAME="output"
 STREAM_ONE_URL="https://stream-relay-geo.ntslive.net/stream"
