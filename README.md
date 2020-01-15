@@ -20,7 +20,7 @@ Step 1. This installs `Homebrew` to your system.
 
 Step 2. With `Homebrew` installed, you can then install `ffmpeg` with it. The following wil install `ffmpeg` on your machine.
 ```
-brew install ffmpeg --with-tools --with-fdk-aac --with-libvpx --with-x265 --HEAD
+brew install ffmpeg
 ```
 
 Step 3. You need to download the storymaker script from the NTS git repository. 'Clone' the code with following command, which will create the repo in a folder called 'storymaker':
@@ -33,7 +33,7 @@ You should now be able to run storymaker.
 ## Usage
 From the terminal, change directory into the storymaker repo if you aren't in it already, e.g. `cd storymaker`. You can check which directory you are in by executing `pwd`. When in the directory, you can execute the script like so:
 ```
-./storymaker --help
+./storymaker.sh --help
 ```
 
 Above executes the help function, there are examples on usages there.
@@ -46,3 +46,8 @@ Flag | Description
 -a [file_path OR url]  | Forces audio source to given file or URL. Defaults to NTS Stream 1 URL.
 --stream2  | Sets audio recording to be taken from NTS Stream 2.
 --help  | Print script usage.
+
+### Woh there!
+
+* Images used must not have a width or height larger than 1200px.
+* Images must have a width and height which are divisible by 2. e.g. 127px:128px is unacceptable.
